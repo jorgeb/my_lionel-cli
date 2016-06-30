@@ -1,0 +1,7 @@
+<div class="list-group">
+  <a href="http://ambrosebauer.com/lotdetail.php?auction=251&lot={{item.external_id}}" [class.active]="i==0" class="list-group-item clearfix list-group-item-info" *ngFor="let item of data; let i = index">
+    <img class="img-circle pull-left" src="http://localhost:3000/img/auction/square/{{item.id}}/70" />
+    <h4 class="list-group-item-heading">Auction {{item.external_id}} - ({{item.current_bid}})</h4>
+    <p class="list-group-item-text">{{item.title}}</p>
+  </a>
+</div>

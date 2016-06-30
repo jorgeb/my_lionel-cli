@@ -1,0 +1,49 @@
+
+<fa [name]="'rocket'"></fa>
+
+
+<div (click)="$event.preventDefault()">
+<pre class="card card-block card-header">{{singleModel}}</pre>
+
+<tabset>
+  <tab *ngFor="let tab of dataTabs"
+        [heading]="tab.label"
+        [active]="tab.active"
+        (select)="selectTab(tab)"
+        (deselect)="tab.active = false">
+
+  <h1>{{ tab.label }}</h1>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let item of tab.content">
+
+      <lv-card
+        title ="Auction [{{item.external_id}}] ({{item.current_bid}})"
+        [subTitle]="item.title"
+        [defaultImg]="'http://localhost:3000/img/auction/' + item.id + '/344/0'"
+        [description]="item.info"
+        [watched]="item.to_watch"
+        [auctionItemId]="item.id"
+        url="http://ambrosebauer.com/lotdetail.php?auction=251&lot={{item.external_id}}"
+      ></lv-card>
+<!--
+      <div class="card">
+  <div class="card-block">
+    <h4 class="card-title">Auction [{{item.external_id}}]</h4>
+    <h6 class="card-subtitle text-muted">{{item.title}}</h6>
+  </div>
+  <img class="card-img-top" src="http://localhost:3000/img/auction/{{item.id}}/300/300" alt="Card image">
+  <div class="card-block">
+    <p class="card-text">{{item.info}}</p>
+  </div>
+</div>
+-->
+    </div>
+  </div>
+</div>
+
+  </tab>
+
+</tabset>
+
+</div>

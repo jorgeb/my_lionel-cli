@@ -1,0 +1,31 @@
+<article class="material-card" [class.Blue-Grey]="!watched" [class.Red]="watched">
+    <h2>
+<span><a href="{{url}}">{{title}}</a></span>
+<strong>
+<i class="fa fa-fw fa-star"></i>
+{{subTitle}}
+</strong>
+</h2>
+    <div class="mc-content">
+        <div class="img-container">
+            <img class="img-responsive" [src]="defaultImg">
+        </div>
+        <div class="mc-description">
+            {{description}}
+        </div>
+    </div>
+    <a class="mc-btn-action">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="mc-footer">
+        <h4>Social</h4>
+        <a class="fa fa-fw fa-facebook"></a>
+        <a class="fa fa-fw fa-twitter"></a>
+        <a class="fa fa-fw fa-linkedin"></a>
+        <a class="fa fa-fw fa-google-plus"></a>
+    </div>
+    <div class="mc-footer mc-on-default">
+        <a class="fa fa-fw fa-heart-o" [class.fa-heart-o]="!watched" [class.fa-heart]="watched" (click)="onCLickWatch(!watched)"></a>
+    </div>
+
+</article>

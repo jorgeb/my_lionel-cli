@@ -1,0 +1,34 @@
+
+<div class='container'>
+<p>
+  I can even contain HTML. <a href="#" [tooltip]="" tooltipHtml="htmlTooltip">Check me out!</a>
+</p>
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <h4>Static arrays</h4>
+            <pre class="card card-block card-header">Model: {{selected | json}}</pre>
+            <input [(ngModel)]="selected" [typeahead]="lionelItems" (typeaheadOnSelect)="typeaheadOnSelect($event)" [typeaheadOptionField]="'lionel_id'"
+                (typeaheadLoading)="changeTypeaheadLoading($event)" (typeaheadNoResults)="changeTypeaheadNoResults($event)" [typeaheadOptionsLimit]="10"
+                placeholder="Type Lionel item" class="form-control" (ngModelChange)="onChange($event)">
+            <div *ngIf="typeaheadLoading===true">
+                <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
+            </div>
+            <div *ngIf="typeaheadNoResults===true" class="" style="">
+                <i class="glyphicon glyphicon-remove"></i> No Results Found
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="list-group">
+                <a href="http://www.tandem-associates.com/lionel/{{item.url}}" [class.active]="i==0" class="list-group-item clearfix list-group-item-info"
+                    *ngFor="let item of lionelItemsFilter; let i = index">
+                    <img class="img-circle pull-left" src="http://localhost:3000/img/lionel/square/{{item.id}}/90" />
+                    <h4 class="list-group-item-heading">{{item.lionel_id}}</h4>
+                    <p class="list-group-item-text">{{item.name}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+        <!--http://localhost:3000/img/auction/square/{{item.id}}/70 -->

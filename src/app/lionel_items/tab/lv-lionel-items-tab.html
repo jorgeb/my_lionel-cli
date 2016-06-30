@@ -1,0 +1,30 @@
+    
+<div (click)="$event.preventDefault()">
+  
+<tabset>
+  <tab *ngFor="let tab of dataTabs" 
+        [heading]="tab.label"
+        [active]="tab.active"
+        (select)="selectTab(tab)"
+        (deselect)="tab.active = false">
+    
+  <h1>{{ tab.label }}</h1>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let item of tab.content">
+      
+      <lv-lionel-items-card
+        [title] ="'Lionel [' + item.lionel_id + ']'"
+        [subTitle]="item.name"
+        [defaultImg]="'http://localhost:3000/img/lionel/' + item.id + '/250/0'"
+        [description]="item.info"
+      ></lv-lionel-items-card>
+    </div>
+  </div>
+</div>
+
+  </tab>
+  
+</tabset>
+
+</div>

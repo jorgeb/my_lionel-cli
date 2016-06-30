@@ -1,0 +1,13 @@
+<lv-auction-selector [auctioneer]="auctioneer" (onAuctionChange)="onAuctionChange($event)"></lv-auction-selector>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-10">
+      <lv-tab-pager [auctionId]="auctionId"></lv-tab-pager>
+    </div>
+
+    <div class="col-xs-12 col-md-2">
+      <lv-favorites [auctionId]="auctionId"></lv-favorites>
+    </div>
+  </div>
+</div>

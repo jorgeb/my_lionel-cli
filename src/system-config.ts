@@ -1,5 +1,5 @@
 /***********************************************************************************************
- * User Configuration.
+ * User Configuration. jas
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
@@ -23,6 +23,7 @@ const barrels: string[] = [
   '@angular/platform-browser',
   '@angular/platform-browser-dynamic',
 
+  '@ngrx/store',
   // Thirdparty barrels.
   'rxjs',
 
@@ -37,6 +38,14 @@ barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
 });
 
+
+cliSystemConfigPackages['moment'] = {format: 'cjs'};
+cliSystemConfigPackages['ng2-bootstrap'] = {format: 'cjs'};
+cliSystemConfigPackages['angular2-fontawesome'] = {
+      defaultExtension: 'js',
+      main: 'components.js'
+    };
+
 /** Type declaration for ambient System. */
 declare var System: any;
 
@@ -44,10 +53,29 @@ declare var System: any;
 System.config({
   map: {
     '@angular': 'vendor/@angular',
+    '@angular2-material': 'vendor/@angular2-material',
     'rxjs': 'vendor/rxjs',
-    'main': 'main.js'
+    '@ngrx': 'vendor/@ngrx',
+    'main': 'main.js',
+    'moment': 'vendor/moment/moment.js',
+    'ng2-bootstrap':'vendor/ng2-bootstrap',
+    'angular2-fontawesome':'vendor/angular2-fontawesome/lib'
   },
   packages: cliSystemConfigPackages
+});
+
+// put the names of any of your Material components here
+const materialPkgs:string[] = [
+  'core',
+  'button',
+  'card',
+  'tabs',
+  'list',
+  'icon'
+];
+
+materialPkgs.forEach((pkg) => {
+  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
 });
 
 // Apply the user's configuration.
