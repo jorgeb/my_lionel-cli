@@ -1,13 +1,7 @@
 
 <div class='container'>
-<p>
-  I can even contain HTML. <a href="#" [tooltip]="" tooltipHtml="htmlTooltip">Check me out!</a>
-</p>
-
     <div class="row">
-        <div class="col-md-8">
-
-            <h4>Static arrays</h4>
+        <div class="col-md-6">
             <pre class="card card-block card-header">Model: {{selected | json}}</pre>
             <input [(ngModel)]="selected" [typeahead]="lionelItems" (typeaheadOnSelect)="typeaheadOnSelect($event)" [typeaheadOptionField]="'lionel_id'"
                 (typeaheadLoading)="changeTypeaheadLoading($event)" (typeaheadNoResults)="changeTypeaheadNoResults($event)" [typeaheadOptionsLimit]="10"
@@ -21,14 +15,20 @@
         </div>
         <div class="col-md-4">
             <div class="list-group">
-                <a href="http://www.tandem-associates.com/lionel/{{item.url}}" [class.active]="i==0" class="list-group-item clearfix list-group-item-info"
-                    *ngFor="let item of lionelItemsFilter; let i = index">
-                    <img class="img-circle pull-left" src="http://localhost:3000/img/lionel/square/{{item.id}}/90" />
+                <a href="http://www.tandem-associates.com/lionel/{{item.url}}" 
+                        (mouseenter)="onMouseEnter(item)" 
+                        (mouseleave)="onMouseLeave(item)"
+                        [class.active]="i==0" 
+                        class="list-group-item clearfix list-group-item-info"
+                        *ngFor="let item of lionelItemsFilter; let i = index">
+                    <img [class.lv-o-opacity]="item.showImage" class="img-circle pull-left" src="http://localhost:3000/img/lionel/square/{{item.id}}/90" />
                     <h4 class="list-group-item-heading">{{item.lionel_id}}</h4>
                     <p class="list-group-item-text">{{item.name}}</p>
+                    <img class="lv-list-img-offset" *ngIf="item.showImage" src="http://localhost:3000/img/lionel/{{item.id}}/320/0" />
                 </a>
             </div>
         </div>
+                
     </div>
 </div>
         <!--http://localhost:3000/img/auction/square/{{item.id}}/70 -->

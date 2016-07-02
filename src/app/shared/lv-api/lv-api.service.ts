@@ -30,13 +30,6 @@ export class LvApiService implements OnInit{
 
   ngOnInit(){
 
-    /*
-     auction_item/1/count
-    this.http.get().subscribe(
-      data => {
-        console.log(data);
-      }
-    )*/
   }
 
 }

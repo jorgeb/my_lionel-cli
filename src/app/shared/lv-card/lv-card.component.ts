@@ -46,7 +46,6 @@ export class LvCardComponent {
    query.push(String(watch));
 
    this.lvApiService.get(query).subscribe(data => {
-     console.log('http://localhost:3000/api/auction_item/445/setwatch/false');
 
    });
 

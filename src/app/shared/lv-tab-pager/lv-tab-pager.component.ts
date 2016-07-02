@@ -78,7 +78,6 @@ export class LvTabPagerComponent implements  OnInit, OnChanges{
     if(!tab.loaded){
 
       this.getContentData(tab.from).subscribe( data => {
-        console.log(data);
         tab.content = data;
         tab.loaded = true;
         
@@ -102,7 +101,6 @@ export class LvTabPagerComponent implements  OnInit, OnChanges{
       query.push('count');
 
       this.lvApiService.get(query).subscribe( data => {
-        console.log(data.count);
 
         this.getDataTabs(data);
         this.dataTabs[0].active = true;

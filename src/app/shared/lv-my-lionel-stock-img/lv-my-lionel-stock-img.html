@@ -1,0 +1,27 @@
+<div class='container'>
+    <div class="row">
+        <div class="col-md-12">
+
+            <ul class="nav" [ngClass]="{'nav-stacked': false,'nav-justified': false,'nav-tabs': true}" (click)="$event.preventDefault()">
+                <li *ngFor="let tabz of dataTabs; let ind = index" class="nav-item" [class.active]="tabz.active" [class.disabled]="tabz.disabled">
+                    <a href class="nav-link" [class.active]="tabz.active" [class.disabled]="tabz.disabled" (click)="selectImgs(tabz)">
+                        <span>{{tabz.label}}</span>
+                    </a>
+                </li>
+            </ul>
+
+            <lv-carousel [noWrap]="true" (onBeginWrap)="onBeginWrap($event)" (onEndWrap)="onEndWrap($event)">
+                <lv-slide *ngFor="let item of noProcessed; let index=index" [active]="item.active">
+                    <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{item.img}}" style="margin:auto;" class="img-hover">
+
+                    <div class="carousel-caption">
+                        <h4>Slide {{index}}</h4>
+
+                        <p>{{item.img}}</p>
+                    </div>
+                </lv-slide>
+            </lv-carousel>
+
+        </div>
+    </div>
+</div>

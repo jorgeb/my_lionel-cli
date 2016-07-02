@@ -30,7 +30,6 @@ ngOnChanges(_) {
 
     this.lvApiService.get(query).subscribe(data => {
       this.data = data;
-      console.log(data)
     });
   };
 };
@@ -44,7 +43,7 @@ ngOnChanges(_) {
    query.push('favorites');
 
    this.lvApiService.get(query).subscribe(data => {
-     console.log(data)
+     
    });
 */
    //http://localhost:3000/api/auction_item/445/setwatch/false

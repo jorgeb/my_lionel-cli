@@ -37,7 +37,7 @@ export class LvLionelItemsTabComponent implements  OnInit, OnChanges{
       query.push('types');
 
       return this.lvApiService.get(query).subscribe( data => {
-        console.log(data);
+        
         data.forEach(tab => {
             this.dataTabs.push({
                 label:tab.name,
@@ -69,7 +69,7 @@ export class LvLionelItemsTabComponent implements  OnInit, OnChanges{
     if(!tab.loaded){
 
       this.getContentData(tab.typeId).subscribe( data => {
-        console.log(data);
+        
         tab.content = data;
         tab.loaded = true;
         

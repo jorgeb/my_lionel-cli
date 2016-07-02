@@ -1,6 +1,8 @@
 import { Component,
     OnInit,
-    Inject } from '@angular/core';
+    Inject,
+    Output,
+    EventEmitter} from '@angular/core';
 
 import { TYPEAHEAD_DIRECTIVES, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
@@ -11,11 +13,15 @@ import { LvApiService, LvApiServiceProviders } from '../lv-api/lv-api.service';
     moduleId: module.id,
     selector: 'lv-lionel-filter',
     templateUrl: 'lv-lionel-filter.html',
+    styleUrls: ['css/lv-lionel-filter.css'],
     directives: [TYPEAHEAD_DIRECTIVES, TOOLTIP_DIRECTIVES],
     providers: []
 })
 export class LvLionelFilterComponent implements OnInit {
 
+    @Output() 
+    onSelected: EventEmitter<any> = new EventEmitter();
+    
     private lionelItems: Array<any> = [];
     private lionelItemsFilter: Array<any> = [];
     
@@ -49,37 +55,25 @@ export class LvLionelFilterComponent implements OnInit {
     }
 
     private typeaheadOnSelect = (e: any): void => {
-        console.log(`Selected value`, e);
+        
+        this.onSelected.emit(e);
     }
     
     private onChange = (event) => {
         this.lionelItemsFilter =
             TypeaheadUtils.filterTypeahead(this.lionelItems,'lionel_id',event).slice(0, 10); 
-        
-        console.log(this.lionelItemsFilter);
+       
     };
-    /*
-    private syncActions():void {
-    this.keyUpEventEmitter
-      .debounceTime(this.typeaheadWaitMs)
-      .mergeMap((value:string) => {
-        let normalizedQuery = this.normalizeQuery(value);
+    
+    private onMouseEnter = (item) => {
+        
+        item.showImage = true;
+    }
 
-        return Observable.from(this.typeahead)
-          .filter((option:any) => {
-            return option && this.testMatch(this.prepareOption(option).toLowerCase(), normalizedQuery);
-          })
-          .toArray();
-      })
-      .subscribe(
-        (matches:string[]) => {
-          this._matches = matches.slice(0, this.typeaheadOptionsLimit);
-          this.finalizeAsyncCall();
-        },
-        (err:any) => {
-          console.error(err);
-        }
-    );
-  }*/
-
+    private onMouseLeave = (item) => {
+        
+        item.showImage = false;
+    }
+    
 }
+

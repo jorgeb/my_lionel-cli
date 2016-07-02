@@ -30,7 +30,7 @@ export class LvAuctionSelectorComponent implements OnChanges {
   constructor (@Inject(LvApiService) private lvApiService:LvApiService) {}
 
   ngOnChanges(_){
-      console.log('this.auctioneer',this.auctioneer)
+     
       this.updateComponent();
   };
   
@@ -44,7 +44,6 @@ export class LvAuctionSelectorComponent implements OnChanges {
       query.push('auctions');
 
       this.lvApiService.get(query).subscribe( data => {
-        console.log(data);
         
         this.auctions = data;
       });
