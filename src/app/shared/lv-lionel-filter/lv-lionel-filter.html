@@ -1,34 +1,44 @@
-
-<div class='container'>
-    <div class="row">
-        <div class="col-md-6">
-            <pre class="card card-block card-header">Model: {{selected | json}}</pre>
-            <input [(ngModel)]="selected" [typeahead]="lionelItems" (typeaheadOnSelect)="typeaheadOnSelect($event)" [typeaheadOptionField]="'lionel_id'"
-                (typeaheadLoading)="changeTypeaheadLoading($event)" (typeaheadNoResults)="changeTypeaheadNoResults($event)" [typeaheadOptionsLimit]="10"
-                placeholder="Type Lionel item" class="form-control" (ngModelChange)="onChange($event)">
-            <div *ngIf="typeaheadLoading===true">
-                <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
-            </div>
-            <div *ngIf="typeaheadNoResults===true" class="" style="">
-                <i class="glyphicon glyphicon-remove"></i> No Results Found
-            </div>
+<div class="row">
+    <div class="col-md-2">
+        <pre class="card card-block card-header">Model: {{selected | json}}</pre>
+        <input #my_input [(ngModel)]="selected" 
+            [typeahead]="lionelItems" 
+            (typeaheadOnSelect)="typeaheadOnSelect($event)" 
+            [typeaheadOptionField]="'lionel_id'"
+            (typeaheadLoading)="changeTypeaheadLoading($event)" 
+            (typeaheadNoResults)="changeTypeaheadNoResults($event)" 
+            [typeaheadOptionsLimit]="10"
+            placeholder="Type Lionel item" 
+            class="form-control" 
+            (ngModelChange)="onChange($event)"
+            (keydown.alt.t)="handleKeyEvent($event)"
+            (keydown.alt.b)="handleKeyEvent($event)"
+            (keydown.alt.a)="handleKeyEvent($event)"
+            (keydown.alt.i)="handleKeyEvent($event)">
+        <div *ngIf="typeaheadLoading===true">
+            <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
         </div>
-        <div class="col-md-4">
-            <div class="list-group">
-                <a href="http://www.tandem-associates.com/lionel/{{item.url}}" 
-                        (mouseenter)="onMouseEnter(item)" 
-                        (mouseleave)="onMouseLeave(item)"
-                        [class.active]="i==0" 
-                        class="list-group-item clearfix list-group-item-info"
-                        *ngFor="let item of lionelItemsFilter; let i = index">
-                    <img [class.lv-o-opacity]="item.showImage" class="img-circle pull-left" src="http://localhost:3000/img/lionel/square/{{item.id}}/90" />
-                    <h4 class="list-group-item-heading">{{item.lionel_id}}</h4>
-                    <p class="list-group-item-text">{{item.name}}</p>
-                    <img class="lv-list-img-offset" *ngIf="item.showImage" src="http://localhost:3000/img/lionel/{{item.id}}/320/0" />
-                </a>
-            </div>
+        <div *ngIf="typeaheadNoResults===true" class="" style="">
+            <i class="glyphicon glyphicon-remove"></i> No Results Found
         </div>
-                
     </div>
+    <div class="col-md-4">
+        <div class="list-group">
+            <a href="http://www.tandem-associates.com/lionel/{{item.url}}" 
+                    (mouseenter)="onMouseEnter(item)" 
+                    (mouseleave)="onMouseLeave(item)"
+                    [class.active]="i==0" 
+                    class="list-group-item clearfix list-group-item-info"
+                    *ngFor="let item of lionelItemsFilter; let i = index"
+                    target="_blank">
+                <img [class.lv-o-opacity]="item.showImage" class="img-circle pull-left" src="http://localhost:3000/img/lionel/square/{{item.id}}/90" />
+                <h4 class="list-group-item-heading">{{item.lionel_id}}</h4>
+                <p class="list-group-item-text">{{item.name}}</p>
+                <img class="lv-list-img-offset" *ngIf="item.showImage" src="http://localhost:3000/img/lionel/{{item.id}}/320/0" />
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <lv-my-lionel-items [lionelTofound]="typing" ></lv-my-lionel-items>
+    </div>            
 </div>
-        <!--http://localhost:3000/img/auction/square/{{item.id}}/70 -->

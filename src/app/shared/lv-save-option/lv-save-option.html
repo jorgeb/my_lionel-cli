@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn-group">
+      <label class="btn btn-primary" [(ngModel)]="options.type" [btnRadio]="saveTypes.Lionel">Lionel</label>
+      <label class="btn btn-primary" [(ngModel)]="options.type" [btnRadio]="saveTypes.Box">Box</label>
+    </div>
+
+    <div class="btn-group">
+      <label class="btn btn-danger" [(ngModel)]="options.action" [btnRadio]="actionTypes.New">New</label>
+      <label class="btn btn-danger" [(ngModel)]="options.action" [btnRadio]="actionTypes.Add">Add</label>
+      <label class="btn btn-danger" [(ngModel)]="options.action" [btnRadio]="actionTypes.Asc">Asociar</label>
+      <label class="btn btn-danger" [(ngModel)]="options.action" [btnRadio]="actionTypes.Del">Del</label>
+      <label class="btn btn-danger" [(ngModel)]="options.action" [btnRadio]="actionTypes.Skip">Skip</label>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">   
+    <lv-carousel [noWrap]="false" (onNewSlide)="onNewSlide($event)">
+      <lv-slide *ngFor="let box of myBoxes; let index=index" [active]="box.active" [itemData]="box" >
+        <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{box.image_url}}" style="margin:auto;" class="img-hover">
+
+        <div class="carousel-caption">
+          <h4>Box {{index}}</h4>
+          <p>{{box.image_url}}</p>
+        </div>
+      </lv-slide>
+    </lv-carousel>
+
+  </div>
+</div>

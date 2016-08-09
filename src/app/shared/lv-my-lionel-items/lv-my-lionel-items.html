@@ -1,0 +1,11 @@
+<div class="list-group">
+    <a href="http://www.tandem-associates.com/lionel/{{item.url}}"
+        [class.list-group-item-danger]="item.active == true" 
+        class="list-group-item clearfix list-group-item-success" 
+        *ngFor="let item of myLionelItemsFiltered; let i = index">
+        
+        <img [class.lv-o-opacity]="item.showImage" class="pull-left img-hover" src="http://localhost:3000/img/my_lionel/stock/200/0/{{item.my_image_url}}"/>
+        <h4 class="list-group-item-heading">{{item.ext_lionel_id}}</h4>
+        <p class="list-group-item-text">{{item.name}}</p>
+    </a>
+</div>

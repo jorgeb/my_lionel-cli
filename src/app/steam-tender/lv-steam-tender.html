@@ -1,0 +1,86 @@
+<h1>Steam - Tender</h1>
+<div class="row">
+<div class="col-md-4">
+<lv-carousel [noWrap]="false"  (onNewSlide)="onNewSlide($event)">
+    <lv-slide *ngFor="let img of myLocos; let index=index" [itemData]="img">
+        <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{img.loco_img_url}}" style="margin:auto;" class="img-hover"/>
+
+        <div class="carousel-caption">
+            <p>{{img.lionel_id}}</p>
+        </div>
+    </lv-slide>
+</lv-carousel>
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let img of tenderBySteam; let index=index">
+    <span>{{img.lionel_tender_id}}</span>
+    <a class="thumbnail alert-info">
+      <img [src]="getImageUrl(img)" style="margin:auto;" class="img-hover"/>
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6" *ngFor="let img of boxImages; let index=index">
+    <a class="thumbnail alert-info">
+      <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{img.box_img_url}}" style="margin:auto;" class="img-hover"/>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<div class="col-md-8">
+<div class="row">
+  <div class="col-md-3" *ngFor="let img of myTenders; let index=index">
+    <span (click)= "imgInModal = img.tender_img_url; lgModal.show()">{{img.lionel_tender_id}}</span>
+    <button type="button" class="btn btn-default" aria-label="Left Align" (click)="setAssoc(img)">
+    <span [class]="getClass(img)" aria-hidden="true"></span>
+    </button>
+
+    <a (click)="onNewSlideTender(img)" class="thumbnail alert-info">
+      <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{img.tender_img_url}}" style="margin:auto;" class="img-hover"/>
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3" *ngFor="let img of mySteamByTenders; let index=index">
+    <span (click)= "imgInModal = img.loco_img_url; lgModal.show()">{{img.lionel_id}}</span>
+    <span [class]="getClassLoco(img)" aria-hidden="true"></span>
+        <a (click)="onNewSlideSteamTender(img)" class="thumbnail alert-success">
+        <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{img.loco_img_url}}" style="margin:auto;" class="img-hover"/>
+        </a>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3" *ngFor="let img of myTenderBySteam; let index=index">
+      <p (click)= "imgInModal = img.tender_img_url; lgModal.show()">{{img.lionel_tender_id}}</p>
+    <a class="thumbnail alert-success">
+      <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{img.tender_img_url}}" style="margin:auto;" class="img-hover"/>
+    </a>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"style="width:1280px" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                <h4 class="modal-title">Large modal</h4>
+            </div>
+            <div class="modal-body">
+                <img src="http://localhost:3000/img/my_lionel/stock/1200/0/{{imgInModal}}" style="margin:auto;" class="img-hover"/>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<article class="material-card Deep-Orange">
+    <h2>
+<span>{{title}}</span>
+<strong>
+<i class="fa fa-fw fa-star"></i>
+{{subTitle}}
+</strong>
+</h2>
+    <div class="mc-content">
+        <div class="img-container">
+            <img class="img-responsive" [src]="defaultImg" />
+        </div>
+        <div class="mc-description">
+            {{description}}
+        </div>
+    </div>
+    <a class="mc-btn-action" (click)="lgModal.show()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="mc-footer">
+        <h4>Social</h4>
+        <a class="fa fa-fw fa-facebook"></a>
+        <a class="fa fa-fw fa-twitter"></a>
+        <a class="fa fa-fw fa-linkedin"></a>
+        <a class="fa fa-fw fa-google-plus"></a>
+    </div>
+    <div class="mc-footer mc-on-default">
+        <a class="fa fa-fw fa-heart-o" (click)="hearted($event)" ></a>
+    </div>
+
+</article>
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" (onShow)="ShowingModal($event)" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                <h4 class="modal-title">Large modal</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav" [ngClass]="{'nav-stacked': false,'nav-justified': false,'nav-tabs': true}" (click)="$event.preventDefault()">
+                    <li *ngFor="let steam of steams; let ind = index" class="nav-item" [class.active]="steam.active" [class.disabled]="steam.disabled">
+                        <a href class="nav-link" [class.active]="steam.active" [class.disabled]="steam.disabled" (click)="selectSteam(steam)">
+                            <span>{{steam.label}}</span>
+                        </a>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-default" aria-label="Left Align" (click)="setDefault()">
+                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                </button>
+                <lv-carousel [noWrap]="false"  (onNewSlide)="onNewSlide($event)">
+                    <lv-slide *ngFor="let img of images; let index=index" [itemData]="img">
+                        <img [src]="getImageUrl(img)" style="margin:auto;" class="img-hover">
+
+                        <div class="carousel-caption">
+                            <h4>Box {{index}}</h4>
+                            <p>{{img.lionel_id}}</p>
+                        </div>
+                    </lv-slide>
+                </lv-carousel>
+            </div>
+        </div>
+    </div>
+</div>

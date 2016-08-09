@@ -1,27 +1,40 @@
-<div class='container'>
-    <div class="row">
-        <div class="col-md-12">
 
-            <ul class="nav" [ngClass]="{'nav-stacked': false,'nav-justified': false,'nav-tabs': true}" (click)="$event.preventDefault()">
-                <li *ngFor="let tabz of dataTabs; let ind = index" class="nav-item" [class.active]="tabz.active" [class.disabled]="tabz.disabled">
-                    <a href class="nav-link" [class.active]="tabz.active" [class.disabled]="tabz.disabled" (click)="selectImgs(tabz)">
-                        <span>{{tabz.label}}</span>
-                    </a>
-                </li>
-            </ul>
+<ul class="nav" [ngClass]="{'nav-stacked': false,'nav-justified': false,'nav-tabs': true}" (click)="$event.preventDefault()">
+    <li *ngFor="let tabz of dataTabs; let ind = index" class="nav-item" [class.active]="tabz.active" [class.disabled]="tabz.disabled">
+        <a href class="nav-link" [class.active]="tabz.active" [class.disabled]="tabz.disabled" (click)="selectImgs(tabz)">
+            <span>{{tabz.label}}</span>
+        </a>
+    </li>
+</ul>
 
-            <lv-carousel [noWrap]="true" (onBeginWrap)="onBeginWrap($event)" (onEndWrap)="onEndWrap($event)">
-                <lv-slide *ngFor="let item of noProcessed; let index=index" [active]="item.active">
-                    <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{item.img}}" style="margin:auto;" class="img-hover">
+<lv-carousel [noWrap]="true" 
+    (onBeginWrap)="onBeginWrap($event)" 
+    (onEndWrap)="onEndWrap($event)"
+    (onNewSlide)="onNewSlide($event)">
+    <lv-slide *ngFor="let item of noProcessed; let index=index" [active]="item.active" [itemData]="item">
+        <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{item.img}}" style="margin:auto;" class="img-hover"
+            (click)="showModal(item)" />
 
-                    <div class="carousel-caption">
-                        <h4>Slide {{index}}</h4>
-
-                        <p>{{item.img}}</p>
-                    </div>
-                </lv-slide>
-            </lv-carousel>
-
+        <div class="carousel-caption">
+            <h4>Slide {{index}}</h4>
+            <p>{{item.img}}</p>
         </div>
+    </lv-slide>
+</lv-carousel>
+
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Large modal</h4>
+      </div>
+      <div class="modal-body">
+        <img src="http://localhost:3000/img/my_lionel/stock/1370/0/{{modal.img}}" style="margin:auto;"/>
+      </div>
     </div>
+  </div>
 </div>

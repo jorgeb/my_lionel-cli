@@ -27,6 +27,8 @@ export class LvAmbrosebauerAuctionsPageComponent implements OnInit {
   };
 
   private onAuctionChange = (auctionId) => {
+    
+    console.log(auctionId)
     this.auctionId = auctionId;
   };
 }

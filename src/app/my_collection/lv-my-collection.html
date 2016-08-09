@@ -1,0 +1,17 @@
+<h1>My Collection</h1>
+
+<lv-tab-l-types (onTabItemTypeSelected)="onTabItemTypeSelected($event)"></lv-tab-l-types>
+<!--http://localhost:3000/img/my_lionel/stock-square/344/WP_20160528_19_57_45_Pro.jpg -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let item of lionelItems" >
+        <lv-card-2 
+            [title]="item.lionel_id"
+            defaultImg="http://localhost:3000/img/my_lionel/stock-square/344/{{item.my_lionel_items_image_def}}"
+            [description]="item.info"
+            [subTitle]="item.name"
+            [thumbnails]="getThumbnails(item)"
+        ></lv-card-2>
+        </div>
+    </div>
+</div>

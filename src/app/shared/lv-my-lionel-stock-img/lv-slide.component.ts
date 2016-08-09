@@ -20,7 +20,8 @@ export class LvSlideComponent implements OnInit, OnDestroy {
   @HostBinding('class.carousel-item')
   public addClass:boolean = true;
 
-
+  @Input() itemData:any;
+  
   public constructor(
     @Inject(forwardRef(() => LvCarouselComponent)) private carousel:LvCarouselComponent) {}
 

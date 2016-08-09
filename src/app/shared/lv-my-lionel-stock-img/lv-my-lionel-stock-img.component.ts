@@ -2,11 +2,16 @@ import { Component,
     OnInit,
     Inject,
     ChangeDetectorRef,
-    AfterViewInit} from '@angular/core';
+    AfterViewInit,
+    ViewChild,
+    Output,
+    EventEmitter} from '@angular/core';
 
 import { TAB_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+// todo: change to ng2-bootstrap
+import {ModalDirective, MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 
-import { LV_CAROUSEL_DIRECTIVES } from './lv-carousel.component';
+import { LV_CAROUSEL_DIRECTIVES, LvCarouselComponent } from './lv-carousel.component';
 import { LvApiService, LvApiServiceProviders } from '../lv-api/lv-api.service';
 
 @Component({
@@ -14,17 +19,26 @@ import { LvApiService, LvApiServiceProviders } from '../lv-api/lv-api.service';
     selector: 'lv-my-lionel-stock-img',
     templateUrl: 'lv-my-lionel-stock-img.html',
     styleUrls: ['css/lv-my-lionel-stock-img.css'],
-    directives: [LV_CAROUSEL_DIRECTIVES, TAB_DIRECTIVES]
+    viewProviders:[BS_VIEW_PROVIDERS],
+    directives: [LV_CAROUSEL_DIRECTIVES, TAB_DIRECTIVES, MODAL_DIRECTVES]
 })
 export class LvMyLionelStockImgComponent implements OnInit, AfterViewInit {
 
+    @Output()
+    onNewImage: EventEmitter<any> = new EventEmitter();
+
+    @ViewChild(LvCarouselComponent) lvCarouselComponent:LvCarouselComponent;
+    @ViewChild('lgModal') lgModal:ModalDirective;
+ 
     private noProcessed: Array<any> = [];
     private allNoProcessed: Array<any> = [];
 
     private itemsBytab: number = 25;
     private dataTabs: Array<any> = [];
     private currentImgTab: any;
-
+    
+    private modal:any = {img:null};
+    
     constructor( @Inject(LvApiService) private lvApiService: LvApiService,
         private _changeDetectionRef: ChangeDetectorRef) { }
 
@@ -122,5 +136,21 @@ export class LvMyLionelStockImgComponent implements OnInit, AfterViewInit {
         this.noProcessed[this.noProcessed.length - 1].active = true;
         this._changeDetectionRef.detectChanges();
     }
+    
+    private onNewSlide = ($event) => {
+        
+        this.onNewImage.emit($event);
+        //itemData.img
+    }
+    
+    private showModal = (item) => {
+        
+        this.modal = item;
+        this.lgModal.show();
+    };
 
+    public NextImage = () => {
+        
+        this.lvCarouselComponent.next();
+    }
 }

@@ -1,3 +1,24 @@
-<h1>Add Item to Catalog, From pictures</h1>
-<lv-my-lionel-stock-img></lv-my-lionel-stock-img>
-<lv-lionel-filter (onSelected)="onSelectedItem($event)"></lv-lionel-filter>
+<div class='container'>
+<div class="row">
+    <div class="col-md-4">
+        <lv-save-option [options]="optSave"></lv-save-option>
+    </div>
+    <div class="col-md-8">
+    <lv-lionel-filter (onSelected)="onSelectedItem($event)" 
+        (onTypeKeyChange)="onTypeKeyChange($event)"
+        (onActionKeyChange)="onActionKeyChange($event)"
+        (onItemKeyChange)="onItemKeyChange($event)">
+    </lv-lionel-filter>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <lv-my-lionel-stock-img (onNewImage)="onNewImage($event)"></lv-my-lionel-stock-img>
+    </div>
+    
+    <div class="col-md-4">
+        <lv-my-lionel-current-img [currentItem]="lastSaved"></lv-my-lionel-current-img>
+    </div>
+</div>
+

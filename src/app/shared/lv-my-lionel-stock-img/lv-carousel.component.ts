@@ -42,10 +42,13 @@ export class LvCarouselComponent implements OnDestroy {
   }
 
   @Output() 
-  onBeginWrap: EventEmitter<number> = new EventEmitter();
+  onBeginWrap = new EventEmitter();
  
   @Output()
-  onEndWrap: EventEmitter<number> = new EventEmitter();
+  onEndWrap = new EventEmitter();
+
+  @Output()
+  onNewSlide: EventEmitter<any> = new EventEmitter();
 
   public set interval(value:number) {
     this._interval = value;
@@ -167,6 +170,7 @@ export class LvCarouselComponent implements OnDestroy {
 
     this.currentSlide = slide;
 
+    this.onNewSlide.emit(slide);
     // every time you change slides, reset the timer
     this.restartTimer();
   }

@@ -1,0 +1,33 @@
+
+            <article class="material-card Indigo" [class.mc-active]="active">
+                <h2>
+                    <span><a href="{{url}}">{{title}}</a></span>
+                    <strong>
+                    <i class="fa fa-fw fa-star" ></i>
+                    {{subTitle}}
+                    </strong>
+                </h2>
+                <div class="mc-content">
+                    <div class="img-container">
+                        <img class="img-responsive" [src]="defaultImg">
+                    </div>
+                    <div class="mc-description">
+                        {{description}}
+                    </div>
+                </div>
+                <a class="mc-btn-action" (click)="onShowDescription()">
+                    <i class="fa" [class.fa-bars]="!active" [class.fa-spin-fast]="showDescription" [class.fa-arrow-left]="active" ></i>
+                </a>
+                <div class="mc-footer">
+                    <h4>Images</h4>
+                </div>
+                <div class="mc-footer mc-on-default">
+                    
+                    <div class="col-md-3" *ngFor="let itm of thumbnails">
+                        <a href="#" class="thumbnail">
+                        <img [src]="itm" alt="...">
+                        </a>
+                    </div>
+                </div>
+
+            </article>

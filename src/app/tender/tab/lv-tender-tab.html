@@ -1,0 +1,31 @@
+    
+<div class="lv-tender-tab" (click)="$event.preventDefault()">
+  
+<tabset>
+  <tab *ngFor="let tab of dataTabs" 
+        [heading]="tab.label"
+        [active]="tab.active"
+        (select)="selectTab(tab)"
+        (deselect)="tab.active = false">
+    
+  <h1>{{ tab.label }}</h1>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let item of tab.content">
+      <lv-tender-card
+        [title] ="'Lionel Tender [' + item.lionel_tender_id + ']'"
+        [subTitle]="item.lionel_tender_id"
+        [defaultImg]="getImageUrl(item)"
+        [description]=""
+        (onHearted)="tabHarted($event)"
+      ></lv-tender-card>
+      <!--https://liveauctioneers-res.cloudinary.com/image/upload/d_awaiting_image.png/v1/img/227/43600/19257186_4_x.jpg-->
+    </div>
+  </div>
+</div>
+
+  </tab>
+  
+</tabset>
+
+</div>

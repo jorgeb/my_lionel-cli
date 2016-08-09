@@ -23,7 +23,7 @@ export class LvAuctionSelectorComponent implements OnChanges {
   public auctioneer:number;
   
   @Output() 
-  onAuctionChange: EventEmitter<number> = new EventEmitter();
+  onAuctionChange:EventEmitter<any> = new EventEmitter();
   
   private auctions:any;
     

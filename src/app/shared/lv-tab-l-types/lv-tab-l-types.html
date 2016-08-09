@@ -1,0 +1,14 @@
+<div (click)="$event.preventDefault()">
+<tabset>
+  <tab *ngFor="let tab of dataTabs" 
+        [heading]="tab.label"
+        [active]="tab.active"
+        (select)="selectTab(tab)"
+        (deselect)="tab.active = false">
+    
+  <h1>{{ tab.label }}</h1>
+
+  </tab>
+  
+</tabset>
+</div>

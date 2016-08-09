@@ -1,0 +1,47 @@
+<h1>Tenders</h1>
+<div *ngIf="saving" class="alert alert-danger" role="alert">Saving Tender Extend</div>
+<lv-tender-tab (onHearted)="onHearted($event)"></lv-tender-tab>
+ <div class="lv-my-tender">
+         
+    <lv-carousel [noWrap]="false" (onNewSlide)="onNewSlide($event)">
+      <lv-slide *ngFor="let img of myTendersImgs; let index=index" [itemData]="img" >
+        <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{img.image_url}}" 
+            style="margin:auto;" 
+            class="img-hover"
+            (click)="imgForModal = img.image_url; lgModal.show()"/>
+
+        <div class="carousel-caption">
+          <p>{{img.image_url}}</p>
+        </div>
+      </lv-slide>
+    </lv-carousel>
+    
+    <div *ngFor="let img of currentImg.extraImg;">
+        <a  class="thumbnail" (click)="imgForModal = img.image_url;lgModal.show()">
+            <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{img.image_url}}" alt="..." />
+        </a>
+    </div>
+
+    <div>
+        <a class="thumbnail">
+            <img src="http://localhost:3000/img/my_lionel/stock/600/0/{{currentImg.box_image_url}}" alt="..." />
+        </a>
+    </div>
+
+  </div>
+  
+  <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Large modal</h4>
+      </div>
+      <div class="modal-body">
+        <img src="http://localhost:3000/img/my_lionel/stock/1370/0/{{imgForModal}}" style="margin:auto;"/>
+      </div>
+    </div>
+  </div>
+</div>
